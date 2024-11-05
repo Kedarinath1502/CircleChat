@@ -28,7 +28,7 @@ class AuthController{
                 id : findUser.id,
                 email : findUser.email
             }
-            const token = jwt.sign(JWTPayload,process.env.JWT_PASSWORD)
+            const token = jwt.sign(JWTPayload,process.env.JWT_SECRET)
         }catch(error){
 
         }
