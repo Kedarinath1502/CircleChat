@@ -28,9 +28,20 @@ class AuthController{
                 id : findUser.id,
                 email : findUser.email
             }
-            const token = jwt.sign(JWTPayload,process.env.JWT_SECRET)
+            const token = jwt.sign(JWTPayload,process.env.JWT_SECRET,{
+                expiresIn : "365d"
+            })
+            return response.json({
+                message: "logged in successfully",
+                user: {
+                    ...findUser,
+                    token:`Bearer ${token}`
+                }
+            })
         }catch(error){
-
+            return response.status(500).json({
+                message: "something went wrong please try again later"
+            })
         }
     }
 }
