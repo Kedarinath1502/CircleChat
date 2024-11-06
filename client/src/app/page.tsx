@@ -10,7 +10,7 @@ export default async function Home() {
   const session: CustomSession | null = await getServerSession(authOption)
   return (
     <div className="min-h-screen flex flex-col ">
-    <Navbar  user={session?.user}/>
+    <Navbar user={session?.user ?? null} />
     <HeroSection />
     <FeatureSection />
     <UserReviews />

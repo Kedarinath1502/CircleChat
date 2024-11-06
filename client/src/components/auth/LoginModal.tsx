@@ -9,12 +9,19 @@ import {
 import { Button } from "../ui/button";
 import Image from "next/image";
 import { DialogDescription } from "@radix-ui/react-dialog";
+import { signIn } from "next-auth/react";
 
 export default function LoginModal() {
+  const handleLogin = () =>{
+    signIn("google",{
+      callbackUrl : "/dashboard",
+      redirect : true
+    })
+  }
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>Getting started</Button>
+        <Button>Get started</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -24,7 +31,7 @@ export default function LoginModal() {
             conversations in seconds.
           </DialogDescription>
         </DialogHeader>
-        <Button variant="outline">
+        <Button variant="outline" onClick={handleLogin}>
           <Image
             src="/images/google.png"
             className=" mr-4"
