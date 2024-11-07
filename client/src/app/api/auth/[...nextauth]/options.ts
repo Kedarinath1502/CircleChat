@@ -33,9 +33,8 @@ export const authOption:AuthOptions = {
                     provider : account?.provider,
                     oauth_id : account?.providerAccountId
                 }
-                console.log(LOGIN_URL)
                 console.log("the payload is", payload)
-                const {data} = await axios.post("http://localhost:8000/api/auth/login", payload)
+                const {data} = await axios.post(LOGIN_URL, payload)
                 console.log("the data is ", data)
                 user.id = data?.user?.id.toString()
                 user.token = data?.user?.token
