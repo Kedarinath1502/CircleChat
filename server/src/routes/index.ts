@@ -8,7 +8,7 @@ router.post("/auth/login", AuthController.login, () => console.log("route called
 
 router.post("/chat-group", AuthMiddleware, ChatGroupController.store)
 router.get("/chat-group", AuthMiddleware, ChatGroupController.index)
-router.get("/chat-group/:id", AuthMiddleware, ChatGroupController.show)
+router.get("/chat-group/:id", ChatGroupController.show)
 router.put("/chat-group/:id", AuthMiddleware, ChatGroupController.update)
 router.delete("/chat-group/:id", AuthMiddleware, ChatGroupController.destroy)
 export default router
