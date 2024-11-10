@@ -21,7 +21,6 @@ export const getSocket = ():Socket =>{
         socket.on("disconnect", () => {
           console.log("Socket disconnected");
         });
-        socket.connect()
       }
     console.log(socket)
     return socket
