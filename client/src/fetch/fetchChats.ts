@@ -7,7 +7,6 @@ export async function fetchChats(groupId: string) {
   });
 
   if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
     throw new Error("Failed to fetch data");
   }
   const response = await res.json();
