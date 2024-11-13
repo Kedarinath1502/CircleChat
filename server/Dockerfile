@@ -9,6 +9,8 @@ RUN npm install
 COPY prisma ./prisma
 COPY . .
 
+COPY .env .env
+
 RUN npx prisma generate
 RUN npm run build
 
@@ -24,4 +26,4 @@ COPY --from=build /src/prisma ./prisma
 
 EXPOSE ${PORT}
 
-CMD ["npm", "start"]
+CMD ["npm", "run", "start"]
