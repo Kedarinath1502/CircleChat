@@ -8,6 +8,8 @@ import setupSocket from "./socketconnect.js";
 import { createAdapter } from "@socket.io/redis-streams-adapter";
 import redis from "./config/redis.js";
 import { instrument } from "@socket.io/admin-ui";
+import { connectKafkaProducer } from "./config/kafka.config.js";
+import { consumeMessages } from "./helper.kafka.js";
 const app: Application = express();
 const PORT = process.env.PORT || 7000;
 
@@ -35,4 +37,8 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.use("/api", Routes)
+connectKafkaProducer().catch((err) => console.log("Kafka Consumer error", err));
+consumeMessages(process.env.KAFKA_TOPIC!).catch((err) =>
+  console.log("The Kafka Consume error", err)
+);
 server.listen(PORT, () => console.log(`Server is running on PORT ${PORT}`));
