@@ -32,8 +32,6 @@ export default function ChatBase({
         ) : (
           <ChatNav chatGroup={group} users={users} user={chatUser} />
         )}
-
-        {/* Messages */}
         <Chats oldMessages={oldMessages} group={group} chatUser={chatUser} />
       </div>
     </div>

@@ -9,7 +9,7 @@ export default function HeroSection() {
         Instant Chat Links for Seamless Conversations
       </h1>
       <p className="text-xl text-gray-600 mb-8">
-        QuickChat makes it effortless to create secure chat links and start
+        CircleChat makes it effortless to create secure chat links and start
         conversations in seconds.
       </p>
       <Link href="/dashboard">
@@ -19,7 +19,6 @@ export default function HeroSection() {
       </Link>
 
       <div className="mt-12 w-full max-w-5xl flex justify-center">
-        {/* Placeholder for Illustration/Image */}
         <img
           src="/images/conversation.svg"
           alt="Illustration"

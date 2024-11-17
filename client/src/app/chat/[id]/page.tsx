@@ -5,16 +5,17 @@ import { notFound } from 'next/navigation';
 import React from 'react'
 
 export default async function chat({ params }: { params: { id: string } }) {
-  if (params.id.length !== 36) {
+  const { id } = await params
+  if (id.length !== 36) {
     return notFound();
   }
-  const chatGroup: GroupChatType | null = await fetchChatGroup(params.id);
+  const chatGroup: GroupChatType | null = await fetchChatGroup(id);
   if (chatGroup === null) {
     return notFound();
   }
   const chatGroupUsers: Array<GroupChatUserType> | [] =
-    await fetchChatGroupUsers(params?.id);
-  const chats: Array<MessageType> | [] = await fetchChats(params.id);
+    await fetchChatGroupUsers(id);
+  const chats: Array<MessageType> | [] = await fetchChats(id);
 
   return (
     <div>
