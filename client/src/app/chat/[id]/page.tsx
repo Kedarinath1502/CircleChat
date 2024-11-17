@@ -1,33 +1,21 @@
-import { Metadata } from 'next';
-import ChatBase from '@/components/chat/ChatBase';
+import ChatBase from '@/components/chat/ChatBase'
 import { fetchChats } from '@/fetch/fetchChats';
 import { fetchChatGroup, fetchChatGroupUsers } from '@/fetch/groupFetch';
 import { notFound } from 'next/navigation';
+import React from 'react'
 
-type PageProps = {
-  params: { id: string };
-};
-
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  return {
-    title: `Chat ${params.id}`,
-  };
-}
-
-export default async function ChatPage({ params }: PageProps) {
-  const { id } = params;
-
-  if (id.length !== 36) {
-    notFound();
+export default async function chat({ params }: { params: { id: string } }) {
+  
+  if (params.id.length !== 36) {
+    return notFound();
   }
-
-  const chatGroup = await fetchChatGroup(id);
-  if (!chatGroup) {
-    notFound();
+  const chatGroup: GroupChatType | null = await fetchChatGroup(params.id);
+  if (chatGroup === null) {
+    return notFound();
   }
-
-  const chatGroupUsers = await fetchChatGroupUsers(id);
-  const chats = await fetchChats(id);
+  const chatGroupUsers: Array<GroupChatUserType> | [] =
+    await fetchChatGroupUsers(params?.id);
+  const chats: Array<MessageType> | [] = await fetchChats(params.id);
 
   return (
     <div>
