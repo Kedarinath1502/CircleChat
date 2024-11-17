@@ -4,21 +4,16 @@ import { fetchChatGroup, fetchChatGroupUsers } from '@/fetch/groupFetch';
 import { notFound } from 'next/navigation';
 import React from 'react';
 
-interface PageProps {
-  params: {
-    id: string;
-  };
-}
-
-export default async function ChatPage({ params }: PageProps) {
+// Use the correct type definition for dynamic routes
+export default async function ChatPage({ params }: { params: { id: string } }) {
   const { id } = params;
 
-  // Validate `id`
+  // Validate the id
   if (id.length !== 36) {
     return notFound();
   }
 
-  // Fetch data
+  // Fetch necessary data
   const chatGroup = await fetchChatGroup(id);
   if (!chatGroup) {
     return notFound();
