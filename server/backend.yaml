@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  labels:
+    app: backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: kedarinath1502/circlechat:1.0
+        ports:
+        - containerPort: 8000
+        env:
+        - name: PORT
+          value: "8000"
+        - name: REDIS_HOST
+          value: "redis-server"
+        - name: REDIS_PORT
+          value: "6379"
+        - name: JWT_SECRET
+          value: "djsfhadsofhsdl02sd15af"
+        - name: DATABASE_URL
+          value: "postgresql://postgres.lnbjfftwlaubhplvumxu:Circlechat150@aws-0-us-west-1.pooler.supabase.com:5432/postgres?pgbouncer=true&sslmode=disable"
+        - name: KAFKA_TOPIC
+          value: "chats"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  labels:
+    app: backend
+spec:
+  selector:
+    app: backend
+  ports:
+    - protocol: TCP
+      port: 8000       # Internal service port
+      targetPort: 8000 # Backend container port
+  type: ClusterIP
