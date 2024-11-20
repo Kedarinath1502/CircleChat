@@ -25,6 +25,7 @@ export default function Chats({
     };
     return socket.connect();
   }, []);
+  
   useEffect(() => {
     socket.on("message", (data: MessageType) => {
       console.log("The message is", data);
